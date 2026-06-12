@@ -1,38 +1,99 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import api from '../services/api';
+import api from "../services/api";
 
 function Register() {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+  const navigate = useNavigate();
 
-        try{
-            const res = await api.post("/auth/register", {name, email, password});
-            console.log(res.data);
-            alert("Registration Successful!");
-        } catch (error) {
-            console.log(error);
-            console.log(error.response?.data);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-            alert(error.response?.data?.message || "Registration Failed!");
-        }
-    };
+    try {
+      await api.post("/auth/register", {
+        name,
+        email,
+        password,
+      });
 
-    return (
-        <div className="form-card">
-            <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-                <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button  className="primary-btn" type="submit">Register</button> 
-            </form>
+      alert("Registration Successful");
+
+      // Redirect to login page
+      navigate("/login");
+
+    } catch (error) {
+      console.log(error);
+
+      alert(
+        error.response?.data?.message ||
+        "Registration Failed"
+      );
+    }
+  };
+
+  return (
+    <div className="form-card">
+      <h1>Register</h1>
+
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Name</label>
+          <input
+            type="text"
+            placeholder="Enter your name"
+            value={name}
+            onChange={(e) =>
+              setName(e.target.value)
+            }
+            required
+          />
         </div>
-    );
+
+        <br />
+
+        <div>
+          <label>Email</label>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) =>
+              setEmail(e.target.value)
+            }
+            required
+          />
+        </div>
+
+        <br />
+
+        <div>
+          <label>Password</label>
+          <input
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) =>
+              setPassword(e.target.value)
+            }
+            required
+          />
+        </div>
+
+        <br />
+
+        <button
+          className="primary-btn"
+          type="submit"
+        >
+          Register
+        </button>
+      </form>
+    </div>
+  );
 }
 
 export default Register;
