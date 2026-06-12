@@ -2,6 +2,12 @@
 
 AI Startup Validator is a full-stack web application that helps entrepreneurs evaluate startup ideas using Google's Gemini AI. Users can create an account, submit startup ideas, receive AI-generated analysis, and maintain a history of previous evaluations.
 
+## Live Demo
+
+Frontend: https://ai-startup-validator-olive.vercel.app/
+
+Backend API: https://ai-startup-validator-rb81.onrender.com/
+
 ## Features
 
 * User Registration
