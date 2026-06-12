@@ -19,8 +19,7 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-console.log("JWT:", process.env.JWT_SECRET);
-console.log("MongoDB URI:", process.env.MONGO_URI);
+
 
 app.use("/api/auth", authRoutes);
 app.use("/api/startup", startupRoutes);
