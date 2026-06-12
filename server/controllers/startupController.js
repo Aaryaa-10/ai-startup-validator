@@ -1,5 +1,5 @@
 import { analyzeStartupIdea } from "../services/geminiService.js";
-import Startup from "../models/Startup.js";
+import Startup from "../models/startup.js";
 
 export const analyzeStartup = async (req, res) => {
     try{
